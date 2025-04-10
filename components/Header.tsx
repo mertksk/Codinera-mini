@@ -18,7 +18,7 @@ export default function Header() {
   </p>
 </Link>
       <a
-        href="https://github.com/osanseviero/geminicoder"
+        href="https://github.com/mertksk/Codinera-mini"
         target="_blank"
         // Updated background, text, and border colors
         className="ml-auto hidden items-center gap-3 rounded-2xl bg-white dark:bg-primary-900/60 text-gray-700 dark:text-gray-300 px-6 py-2 sm:flex border border-gray-300 dark:border-primary-700 hover:bg-gray-50 dark:hover:bg-primary-800/60"
