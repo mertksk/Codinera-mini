@@ -12,11 +12,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: "#E1E7EC",
+        brand: "#E1E7EC", // Keep or replace? Let's keep for now, might remove later if unused.
         gray: colors.slate,
+        primary: colors.purple, // Add purple palette
       },
       backgroundColor: {
-        dark: "#0B1120",
+        dark: "#1a1035", // Dark purple background for dark mode
       },
       backgroundImage: {
         'dark-radial': 'radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)',

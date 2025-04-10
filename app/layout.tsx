@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-let title = "Gemini Coder – AI Code Generator";
+let title = "Codinera – AI Code Generator";
 let description = "Generate your next app with Gemini";
 let url = "https://llamacoder.io/";
 let ogimage = "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg";
-let sitename = "geminicoder.io";
+let sitename = "combocoder.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(url),
@@ -24,12 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    images: [ogimage],
-    title,
-    description,
-  },
+ 
 };
 
 export default function RootLayout({
@@ -38,7 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    // Removed h-full from html tag
+    <html lang="en" suppressHydrationWarning> 
       <ThemeProvider>
         {children}
       </ThemeProvider>

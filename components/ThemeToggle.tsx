@@ -8,7 +8,8 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-200 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+      // Updated background colors to use primary (purple) theme
+      className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-100 text-primary-600 transition-colors hover:bg-primary-200 dark:bg-primary-800 dark:text-primary-300 dark:hover:bg-primary-700"
       aria-label="Toggle dark mode"
     >
       {theme === "light" ? (
@@ -44,4 +45,4 @@ export default function ThemeToggle() {
       )}
     </button>
   );
-} 
+}

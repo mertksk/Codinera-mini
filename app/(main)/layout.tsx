@@ -10,7 +10,9 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <body className="bg-brand dark:bg-dark antialiased dark:text-gray-100">
+    // Removed flex properties from body
+    <body className="bg-brand dark:bg-dark antialiased dark:text-gray-100 relative">
+      {/* Background elements */}
       <div className="absolute inset-0 dark:bg-dark-radial" />
       <div className="absolute inset-x-0 flex justify-center">
         <Image
@@ -21,12 +23,17 @@ export default function Layout({
         />
       </div>
 
-      <div className="isolate relative">
-        <div className="mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center py-2">
-          <div className="fixed right-4 top-4 z-50">
-            <ThemeToggle />
-          </div>
+      {/* Main content container - Removed min-h-screen */}
+      <div className="relative isolate flex flex-col items-center py-2">
+        {/* Theme Toggle */}
+        <div className="fixed right-4 top-4 z-50">
+          <ThemeToggle />
+        </div>
+
+        {/* Width constraint and centering for content */}
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center">
           <Header />
+          {/* Children (page content) */}
           {children}
           <Footer />
         </div>

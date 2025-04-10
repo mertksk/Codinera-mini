@@ -25,14 +25,34 @@ export async function POST(req: Request) {
 
   let { model, messages } = result.data;
   let systemPrompt = getSystemPrompt();
+  const geminiModel = genAI.getGenerativeModel({ model: model });
 
-  const geminiModel = genAI.getGenerativeModel({model: model});
+  // Map messages to the format expected by the Gemini API
+  // Prepend system prompt to the first user message
+  const geminiMessages = messages.map((msg, index) => {
+    const role = msg.role === "assistant" ? "model" : "user";
+    let content = msg.content;
+    // Add system prompt and specific instructions to the first user message
+    // Add system prompt and specific instructions to the first user message
+    if (msg.role === "user" && index === 0) {
+      content = systemPrompt + "\n\nUser Prompt: " + content + "\nPlease ONLY return code, NO backticks or language names. Don't start with ```typescript or ```javascript or ```tsx or ```.";
+    } else if (msg.role === 'user' && index > 0) {
+      // For subsequent user messages (modifications), explicitly ask to modify previous code
+      content = "Based on the previous code provided by the assistant, please apply the following modification: " + content + "\nPlease ONLY return the *complete, modified* React code, NO backticks or language names.";
+    }
+    return {
+      role: role,
+      parts: [{ text: content }],
+    };
+  });
 
-  const geminiStream = await geminiModel.generateContentStream(
-    messages[0].content + systemPrompt + "\nPlease ONLY return code, NO backticks or language names. Don't start with \`\`\`typescript or \`\`\`javascript or \`\`\`tsx or \`\`\`."
-  );
+  console.log("Sending messages to Gemini:", JSON.stringify(geminiMessages, null, 2));
 
-  console.log(messages[0].content + systemPrompt + "\nPlease ONLY return code, NO backticks or language names. Don't start with \`\`\`typescript or \`\`\`javascript or \`\`\`tsx or \`\`\`.")
+  // Pass the entire mapped message history
+  const geminiStream = await geminiModel.generateContentStream({
+    contents: geminiMessages,
+    // Optional: Add generationConfig if needed, e.g., temperature, maxOutputTokens
+  });
 
   const readableStream = new ReadableStream({
     async start(controller) {

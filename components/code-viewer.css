@@ -1,7 +1,28 @@
 .sp-preview-container {
-  @apply flex h-full w-full grow flex-col justify-center;
+  @apply flex min-h-[calc(100vh-200px)] w-full grow flex-col justify-center overflow-auto;
 }
 
 .sp-preview-iframe {
-  @apply grow;
+  @apply grow min-h-0;
+}
+
+/* Style the Sandpack "Open in CodeSandbox" button */
+.sp-wrapper .sp-header button {
+  @apply !bg-primary-600 !text-white hover:!bg-primary-500 focus-visible:!outline-primary-600; /* Use Tailwind classes with !important */
+  border-radius: 0.375rem; /* Equivalent to rounded-md */
+  padding: 0.25rem 0.75rem; /* Adjust padding as needed */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  transition: background-color 0.2s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); /* shadow-sm */
+}
+
+/* Ensure icon color matches text */
+.sp-wrapper .sp-header button svg {
+  @apply !fill-current; 
+}
+
+/* Optional: Adjust spacing if needed */
+.sp-wrapper .sp-header {
+  @apply pr-2; /* Add some padding to the right of the header if button feels cramped */
 }
